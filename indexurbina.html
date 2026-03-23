@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ópticas Urbina | Ve claro otra vez, sin complicaciones</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Colores extraídos del logo */
+            --primary: #1A3668;    /* Azul Marino Logo */
+            --secondary: #34B3E4;  /* Celeste Logo */
+            --brand-red: #E9422A;  /* Rojo/Naranja Logo */
+            --accent: #25D366;     /* Verde WhatsApp */
+            --accent-hover: #1EBE5C;
+            --bg-light: #F8FAFC;   /* Gris súper claro */
+            --text-main: #334155;  /* Gris oscuro */
+            --text-muted: #64748B;
+            --white: #FFFFFF;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(52, 179, 228, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Utilidades */
+        .text-center { text-align: center; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mb-3 { margin-bottom: 3rem; }
+        
+        /* Botones */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-wa {
+            background-color: var(--accent);
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-wa:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 10px 25px rgba(26, 54, 104, 0.2);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Navbar */
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 200px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-fallback {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, #F0F7FF 0%, #FFFFFF 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* Beneficios */
+        .benefits {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon-wrapper {
+            width: 70px;
+            height: 70px;
+            background: #F0F9FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--secondary);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .icon-wrapper {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Oferta Destacada */
+        .offer-banner {
+            margin: 60px auto;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            text-align: center;
+            color: var(--white);
+            box-shadow: var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .offer-banner h2 {
+            color: var(--white);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .offer-banner p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Servicios */
+        .services {
+            padding: 80px 0;
+            background: var(--bg-light);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .service-item {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--brand-red);
+        }
+
+        .service-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            background: #F0F9FF;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .service-item h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .service-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Testimonios */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 40px 30px;
+            border-radius: var(--radius-md);
+            position: relative;
+        }
+
+        .testimonial-card i.fa-quote-left {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: rgba(52, 179, 228, 0.15);
+        }
+
+        .stars {
+            color: #FBBF24;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .author-info span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 100px 0;
+            background: var(--white);
+            text-align: center;
+        }
+
+        .cta-final h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            padding: 70px 0 30px;
+            font-size: 0.95rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .footer-col p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-col i {
+            color: var(--secondary);
+            width: 20px;
+            font-size: 1.1rem;
+        }
+
+        .social-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--white);
+        }
+
+        .social-link i {
+            color: #E1306C; /* Instagram Color */
+        }
+
+        .location-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .location-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.4;
+        }
+
+        .location-list li i {
+            color: var(--brand-red);
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* WhatsApp Flotante */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            background-color: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulse 2s infinite;
+        }
+
+        .wa-float:hover {
+            transform: scale(1.1);
+            background-color: var(--accent-hover);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Animaciones Scroll */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Media Queries */
+        @media (min-width: 768px) {
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(3, 1fr); }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-4 { grid-template-columns: repeat(4, 1fr); }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        @media (max-width: 480px) {
+            .nav-btn { display: none; }
+            .hero { padding: 130px 0 80px; }
+            .logo-img { max-height: 45px; }
+            .logo-fallback { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav>
+        <div class="container nav-container">
+            <!-- Coloca tu archivo de logo (logo.png, logo.jpg, o logo.svg) en la misma carpeta que este archivo HTML -->
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Ópticas Urbina Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <span class="logo-fallback" style="display: none;">
+                    <i class="fa-solid fa-eye" style="color: var(--secondary);"></i> ÓPTICAS URBINA
+                </span>
+            </a>
+            <a href="https://wa.me/50500000000?text=Hola%2C%20quiero%20agendar%20un%20examen%20visual" target="_blank" class="btn btn-primary nav-btn" style="padding: 10px 24px; font-size: 0.95rem;">
+                Agendar Cita
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container fade-up">
+            <h1>Ve claro otra vez,<br><span>sin complicaciones</span></h1>
+            <p>Exámenes visuales de alta precisión, aros en tendencia y entrega rápida. Dale a tus ojos el descanso que merecen agendando tu cita hoy mismo.</p>
+            <a href="https://wa.me/50500000000?text=Hola%2C%20quiero%20agendar%20un%20examen%20visual" target="_blank" class="btn btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> Agendar por WhatsApp
+            </a>
+            <p style="margin-top: 15px; font-size: 0.85rem; color: var(--text-muted);">Respuesta en menos de 5 minutos</p>
+        </div>
+    </header>
+
+    <!-- Sección Beneficios -->
+    <section class="benefits">
+        <div class="container">
+            <div class="text-center mb-3 fade-up">
+                <h2>¿Por qué elegir Ópticas Urbina?</h2>
+                <p class="text-muted">Combinamos tecnología clínica con asesoría de imagen.</p>
+            </div>
+            
+            <div class="grid-4 fade-up">
+                <div class="card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-microscope"></i></div>
+                    <h3>Precisión Digital</h3>
+                    <p>Exámenes computarizados exactos para detectar tu graduación perfecta sin margen de error.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Garantía Total</h3>
+                    <p>Si no te adaptas a tus nuevos cristales, los ajustamos sin ningún costo adicional.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-gem"></i></div>
+                    <h3>Aros en Tendencia</h3>
+                    <p>Asesoría personalizada para elegir la montura que mejor resalte tus rasgos faciales.</p>
+                </div>
+                <div class="card">
+                    <div class="icon-wrapper"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Entrega Rápida</h3>
+                    <p>Sabemos que los necesitas. Entregamos tus lentes en tiempo récord y con máxima calidad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Oferta -->
+    <section class="container fade-up">
+        <div class="offer-banner">
+            <h2>🎁 Examen Visual GRATIS</h2>
+            <p>Al realizar la compra de tus lentes completos (aro + cristales) te regalamos el examen computarizado.</p>
+            <a href="https://wa.me/50500000000?text=Hola%2C%20quiero%20aprovechar%20la%20oferta%20del%20examen%20gratis" target="_blank" class="btn btn-wa" style="position: relative; z-index: 1;">
+                <i class="fa-brands fa-whatsapp"></i> Reclamar Oferta Ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section class="services">
+        <div class="container">
+            <div class="text-center mb-3 fade-up">
+                <h2>Todo para tu salud visual</h2>
+                <p>Soluciones integrales diseñadas para tu estilo de vida.</p>
+            </div>
+
+            <div class="services-grid fade-up">
+                <div class="service-item">
+                    <i class="fa-solid fa-eye"></i>
+                    <div>
+                        <h4>Examen Visual Completo</h4>
+                        <p>Evaluación clínica profunda para determinar tu salud ocular y graduación.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <i class="fa-solid fa-laptop"></i>
+                    <div>
+                        <h4>Lentes Anti-Fatiga (Blue Block)</h4>
+                        <p>Cristales con filtro de luz azul, ideales para quienes pasan horas frente a pantallas.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <i class="fa-solid fa-sun"></i>
+                    <div>
+                        <h4>Lentes de Sol con Medida</h4>
+                        <p>Protección UV 100% combinada con tu graduación exacta. Moda y salud en uno.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <i class="fa-solid fa-droplet"></i>
+                    <div>
+                        <h4>Lentes de Contacto</h4>
+                        <p>Adaptación profesional y marcas premium para una visión natural y sin límites.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Testimonios -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="text-center mb-3 fade-up">
+                <h2>Pacientes Felices</h2>
+                <p>No lo decimos nosotros, lo dicen quienes ya ven claro.</p>
+            </div>
+
+            <div class="grid-3 fade-up">
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Excelente atención, el proceso de agendar por WhatsApp fue súper rápido. Me entregaron mis lentes al día siguiente y veo perfecto. Muy recomendados."</p>
+                    <div class="author">
+                        <div class="author-img">MJ</div>
+                        <div class="author-info">
+                            <h4>María Jiménez</h4>
+                            <span>Paciente verificada</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Tenía años de no revisarme la vista por falta de tiempo. Fui a Ópticas Urbina y el examen fue muy profesional. Los aros modernos y a excelente precio."</p>
+                    <div class="author">
+                        <div class="author-img">CT</div>
+                        <div class="author-info">
+                            <h4>Carlos Torres</h4>
+                            <span>Paciente verificado</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="testimonial-text">"Llevé a mis hijos para su chequeo escolar y nos dieron un trato increíble. Tienen mucha paciencia y te explican todo con claridad en cualquiera de sus sucursales."</p>
+                    <div class="author">
+                        <div class="author-img">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Pérez</h4>
+                            <span>Paciente verificada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container fade-up">
+            <h2>¿Listo para darle a tus ojos el descanso que merecen?</h2>
+            <p class="mb-2">Agenda hoy y aprovecha nuestra promoción de examen visual gratuito.</p>
+            <a href="https://wa.me/50500000000?text=Hola%2C%20quiero%20agendar%20un%20examen%20visual" target="_blank" class="btn btn-wa" style="padding: 20px 40px; font-size: 1.2rem;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i> Agendar Cita Ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Columna 1: Sobre Nosotros -->
+                <div class="footer-col">
+                    <h3>Ópticas Urbina</h3>
+                    <p>Combinamos la mejor tecnología clínica con las últimas tendencias en moda visual para cuidar la salud de tus ojos a nivel nacional.</p>
+                </div>
+                
+                <!-- Columna 2: Sucursales -->
+                <div class="footer-col">
+                    <h3>Sucursales</h3>
+                    <ul class="location-list">
+                        <li><i class="fa-solid fa-location-dot"></i> Managua / Villa don Bosco</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Managua / Bolonia</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Granada / Esquipulas Matagalpa</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Chinandega / Estelí</li>
+                        <li><i class="fa-solid fa-location-dot"></i> El Cúa / Jinotega</li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Contacto & Redes -->
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <p><i class="fa-brands fa-whatsapp"></i> +505 0000 0000</p>
+                    <p><i class="fa-solid fa-envelope"></i> citas@opticasurbina.com</p>
+                    <p style="margin-top: 15px;">
+                        <a href="https://www.instagram.com/opticas_urbina/" target="_blank" class="social-link">
+                            <i class="fa-brands fa-instagram" style="font-size: 1.4rem;"></i> @opticas_urbina
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Columna 4: Horario -->
+                <div class="footer-col">
+                    <h3>Horario de Atención</h3>
+                    <p><i class="fa-regular fa-clock"></i> Lunes a Viernes: 8:00 AM - 5:00 PM</p>
+                    <p><i class="fa-regular fa-clock"></i> Sábados: 8:00 AM - 12:00 PM</p>
+                    <p><i class="fa-solid fa-calendar-xmark" style="color: var(--brand-red);"></i> Domingos: Cerrado</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> Ópticas Urbina. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón WhatsApp Flotante -->
+    <a href="https://wa.me/50500000000?text=Hola%2C%20quiero%20agendar%20un%20examen%20visual" target="_blank" class="wa-float" aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Actualizar año del footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Animación de aparición al hacer scroll (Intersection Observer)
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Solo animar una vez
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-up');
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
